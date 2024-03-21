@@ -62,3 +62,5 @@ def register(request):
     else:
         return render(request, "auctions/register.html")
 
+def new_listing(request):
+    return render(request, "auctions/new_listing.html")
