@@ -53,13 +53,17 @@ form {
     outline: none;
     padding: 0.5rem 1rem;
 }
+
+.currency-wrap > .input2{
+    padding: 0.5rem 2rem;
+}
 .currency-wrap{
     position:relative;
 }
 
 .currency-code{
     position:absolute;
-    left:0.25rem;
+    left: 1rem;
     top: 0.5rem;
 }
 
