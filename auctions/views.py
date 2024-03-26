@@ -3,8 +3,9 @@ from django.db import IntegrityError
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils import timezone
 
-from .models import User, Category
+from .models import User, Category, Listing
 
 
 def index(request):
@@ -63,7 +64,18 @@ def register(request):
         return render(request, "auctions/register.html")
 
 def new_listing(request):
-    if request.method == "GET":
+    if request.method == "POST":
+        user = request.user
+        category = Category.objects.get(title=request.POST["category"])
+        title = request.POST["title"] 
+        description = request.POST["description"] 
+        starting_bid = request.POST["starting_bid"] 
+        image = request.POST["user"]
+        created_at = timezone.now() 
+        created_listing = Listing(user=user, category=category, title=title, description=description, starting_bid=starting_bid, current_bid=starting_bid, image=image, created_at=created_at)
+        created_listing.save()
+        return HttpResponseRedirect(reverse("index"))
+    else:
         categories = Category.objects.all()
         return render(request, "auctions/new_listing.html",{
             "categories": categories
