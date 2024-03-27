@@ -5,6 +5,10 @@ from .models import User, Category, Listing, Bid, Comment
 
 admin.site.register(User)
 admin.site.register(Category)
-admin.site.register(Listing)
 admin.site.register(Bid)
 admin.site.register(Comment)
+
+class ListingAdmin(admin.ModelAdmin):
+    readonly_fields = ('created_at',)
+
+admin.site.register(Listing,ListingAdmin)
